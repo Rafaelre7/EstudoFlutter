@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         ),
         home: Scaffold(
           appBar: AppBar(
+            leading: Container(),
             title: Text('Tarefas'),
           ),
           body: ListView(
@@ -87,15 +88,26 @@ class _TaskState extends State<Task> {
                                     .ellipsis //colocando ... caso texto muito grande
                                 ),
                           )),
-                      ElevatedButton(
-                          onPressed: () {
-                            //Funcao para mostrar que esta alterando o valor
-                            setState(() {
-                              nivel++;
-                            });
-                            print(nivel);
-                          },
-                          child: Icon(Icons.arrow_drop_up))
+                      Container(
+                        height: 52,
+                        width: 65,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              //Funcao para mostrar que esta alterando o valor
+                              setState(() {
+                                nivel++;
+                              });
+                              print(nivel);
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Icon(Icons.arrow_drop_up),
+                                Text("UP", style: TextStyle(fontSize: 12),)
+                              ],
+                            )),
+                      )
                     ],
                   ),
                 ),
