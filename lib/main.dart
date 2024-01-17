@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget {
               Task('Aprender Java'),
               Task('Aprender Kotlin'),
               Task('Aprender Kotlin'),
-              Task('Aprender Kotlin hkjsefhdjkfhgdsjkhgkjdshgkjhsdkjghkjsdhgkjdfhgjha'),
+              Task(
+                  'Aprender Kotlin hkjsefhdjkfhgdsjkhgkjdshgkjhsdkjghkjsdhgkjdfhgjha'),
               Task('Aprender Kotlin'),
               Task('Aprender Kotlin'),
             ],
@@ -38,10 +39,19 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Task extends StatelessWidget {
+//Stateless: quando o componente é estatíco e nunca atualiza só quando é reiniciado a aplicação
+//Statefull: o valor é reativo sempre que alterado alguma variavel ele atualiza
+class Task extends StatefulWidget {
   final String nome;
 
   const Task(this.nome, {super.key});
+
+  @override
+  State<Task> createState() => _TaskState();
+}
+
+class _TaskState extends State<Task> {
+  int nivel = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -54,30 +64,64 @@ class Task extends StatelessWidget {
               color: Colors.blue,
               height: 140,
             ),
-            Container(
-              color: Colors.white,
-              height: 100,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    color: Colors.grey,
-                    width: 72,
-                    height: 100,
+            Column(
+              children: [
+                Container(
+                  color: Colors.white,
+                  height: 100,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        color: Colors.grey,
+                        width: 72,
+                        height: 100,
+                      ),
+                      Container(
+                          width: 200,
+                          child: Text(
+                            widget.nome,
+                            style: TextStyle(
+                                fontSize: 24,
+                                overflow: TextOverflow
+                                    .ellipsis //colocando ... caso texto muito grande
+                                ),
+                          )),
+                      ElevatedButton(
+                          onPressed: () {
+                            //Funcao para mostrar que esta alterando o valor
+                            setState(() {
+                              nivel++;
+                            });
+                            print(nivel);
+                          },
+                          child: Icon(Icons.arrow_drop_up))
+                    ],
                   ),
-                  Container(
-                    width: 200,
-                      child: Text(
-                    nome,
-                    style: TextStyle(
-                      fontSize: 24,
-                      overflow: TextOverflow.ellipsis //colocando ... caso texto muito grande
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Container(
+                        child: LinearProgressIndicator(
+                          color: Colors.white,
+                          value: nivel/10,
+                        ),
+                        width: 200,
+                      ),
                     ),
-                  )),
-                  ElevatedButton(
-                      onPressed: () {}, child: Icon(Icons.arrow_drop_up))
-                ],
-              ),
+                    Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Text(
+                        "Nivel: $nivel",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             )
           ],
         ),
