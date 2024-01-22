@@ -2,6 +2,10 @@
 
 Utilizei esse projeto para colocar em pratica uma base de aprendizado em flutter.
 
+![lista_tarefas](https://github.com/Rafaelre7/EstudoFlutter/assets/33284324/bb91eba5-655d-4dca-979b-ddfb61ddb55b)
+
+
+
 ## Oque foi implementado
 
 - Widgets como Row, Collumn, Stack, Container
